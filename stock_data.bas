@@ -1,15 +1,15 @@
-Attribute VB_Name = "Module1"
-Sub WorksheetLoop()
+Attribute VB_Name = "Module11"
+Sub Stock_Data()
 
-Dim WS_Count As Integer
+'Dim WS_Count As Integer
 
-Dim X As Integer
+'Dim X As Integer
 
-WS_Count = ActiveWorkbook.Worksheets.Count
+'WS_Count = ActiveWorkbook.Worksheets.Count
 
-For X = 1 To WS_Count
+'For X = 1 To WS_Count
 
-Worksheets(X).Activate
+'Worksheets(X).Activate
             
   Cells(1, "i") = "Ticker"
   Cells(1, "j") = "Yearly Change"
@@ -37,7 +37,7 @@ Dim fin_price As Double
 Dim ann_change As Variant
   
   
-    For i = 2 To 705719
+    For i = 2 To 800000
   
   
     If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
@@ -91,7 +91,7 @@ Dim ann_change As Variant
 
   Next i
 
-For j = 2 To 705719
+For j = 2 To 800000
   
   If Cells(j, 11) > 0 Then
         Cells(j, 11).Interior.ColorIndex = 4
@@ -101,6 +101,14 @@ For j = 2 To 705719
   
   Next j
     
-    Next X
+    'Next X
 
-      End Sub
+  max = Application.WorksheetFunction.max(Range("j2: j800000"))
+     
+     Cells(1, 17).Value = max
+  
+  Min = Application.WorksheetFunction.Min(Range("j2:j800000"))
+      
+     Cells(1, 18).Value = Min
+      
+    End Sub
