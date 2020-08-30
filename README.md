@@ -1,0 +1,2 @@
+# VBA-Challenge 
+This repository contains VBA code that will analyze stock data in Excel to provide; the ticker symbol, yearly change from opening price at the biggining of the year to the closing price at the end of the year, the percent change from the opening to closing of the year, and the total stock volume. Screen shots of the code in action are provided. This code was prepared to complete assignment 'VBA-Challenge' for the UCSD Extension Data Science and Visualization course on 8/29/20.
