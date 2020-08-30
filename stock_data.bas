@@ -17,6 +17,11 @@ Sub Stock_Data()
   Cells(1, "l") = "Total Stock Volume"
   Cells(1, "o") = "in_price"
   Cells(1, "p") = "fin_price"
+  Cells(1, "s") = "Ticker"
+  Cells(1, "t") = "Value"
+  Cells(2, "q") = "Greatest % Increase"
+  Cells(3, "q") = "Greatest % Decrease"
+  Cells(4, "q") = "Greatest Total Volume"
   
 Dim Ticker As String
 
@@ -103,12 +108,14 @@ For j = 2 To 800000
     
     'Next X
 
-  max = Application.WorksheetFunction.max(Range("j2: j800000"))
+  max = Application.WorksheetFunction.max(Range("k2: k800000"))
      
-     Cells(1, 17).Value = max
+     Cells(2, "t").Value = max
   
-  Min = Application.WorksheetFunction.Min(Range("j2:j800000"))
+  Min = Application.WorksheetFunction.Min(Range("k2:k800000"))
       
-     Cells(1, 18).Value = Min
+     Cells(3, "t").Value = Min
       
+  max = Application.WorksheetFunction.max(Range("l2:l800000"))
+    
     End Sub
