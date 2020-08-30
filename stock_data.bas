@@ -1,28 +1,33 @@
 Attribute VB_Name = "Module11"
 Sub Stock_Data()
 
-'Dim WS_Count As Integer
+Dim WS_Count As Integer
 
-'Dim X As Integer
+Dim X As Integer
 
-'WS_Count = ActiveWorkbook.Worksheets.Count
+WS_Count = ActiveWorkbook.Worksheets.Count
 
-'For X = 1 To WS_Count
+For X = 1 To WS_Count
 
-'Worksheets(X).Activate
+Worksheets(X).Activate
             
   Cells(1, "i") = "Ticker"
   Cells(1, "j") = "Yearly Change"
   Cells(1, "k") = "% Change"
   Cells(1, "l") = "Total Stock Volume"
-  Cells(1, "o") = "in_price"
-  Cells(1, "p") = "fin_price"
-  Cells(1, "s") = "Ticker"
-  Cells(1, "t") = "Value"
-  Cells(2, "q") = "Greatest % Increase"
-  Cells(3, "q") = "Greatest % Decrease"
-  Cells(4, "q") = "Greatest Total Volume"
+  Cells(1, "p") = "Ticker"
+  Cells(1, "q") = "Value"
+  Cells(2, "o") = "Greatest % Increase"
+  Cells(3, "o") = "Greatest % Decrease"
+  Cells(4, "o") = "Greatest Total Volume"
   
+Dim end_data As Long
+
+Dim end_summ As Integer
+
+end_data = Cells(Rows.Count, 1).End(xlUp).Row
+
+
 Dim Ticker As String
 
 Dim Stock_Total As Double
@@ -42,7 +47,7 @@ Dim fin_price As Double
 Dim ann_change As Variant
   
   
-    For i = 2 To 800000
+    For i = 2 To end_data
   
   
     If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
@@ -70,10 +75,6 @@ Dim ann_change As Variant
       Range("i" & Summary_Table_Row).Value = Ticker
 
       Range("l" & Summary_Table_Row).Value = Stock_Total
-
-      'Range("P" & Summary_Table_Row).Value = fin_price
-      
-      'Range("O" & Summary_Table_Row).Value = in_price
       
       Range("K" & Summary_Table_Row).Value = per_change
       
@@ -97,7 +98,9 @@ Dim ann_change As Variant
 
   Next i
 
-For j = 2 To 800000
+end_summ = Cells(Rows.Count, "i").End(xlUp).Row
+
+For j = 2 To end_summ
   
   If Cells(j, 11) > 0 Then
         Cells(j, 10).Interior.ColorIndex = 4
@@ -110,46 +113,41 @@ For j = 2 To 800000
     
   Summer_Table_Row = 0
   
-  Dim Max_Change As Double
-
-  Max_Change = 0
-
-
-For k = 2 To 800000
   
-  If Cells(k, "k").Value = Cells(2, "t").Value Then
+  Max = Application.WorksheetFunction.Max(Range("k2:k3000"))
+     Cells(2, "q").NumberFormat = "0.00%"
+     Cells(2, "q").Value = Max
+  
+  Min = Application.WorksheetFunction.Min(Range("k2:k3000"))
+     Cells(3, "q").NumberFormat = "0.00%"
+     Cells(3, "q").Value = Min
+      
+  max_vol = Application.WorksheetFunction.Max(Range("l2:k3000"))
+    Cells(4, "q") = max_vol
 
-  Cells(2, "s").Value = Cells(k, "i").Value
+
+For k = 2 To 3000
+  
+  If Cells(k, "k").Value = Cells(2, "q").Value Then
+
+    Cells(2, "p").Value = Cells(k, "i").Value
   
   End If
   
-  If Cells(k, "k").Value = Cells(3, "t").Value Then
+  If Cells(k, "k").Value = Cells(3, "q").Value Then
   
-  Cells(3, "s").Value = Cells(k, "i").Value
+    Cells(3, "p").Value = Cells(k, "i").Value
   
   End If
   
-  If Cells(k, "l").Value = Cells(4, "t").Value Then
+  If Cells(k, "l").Value = Cells(4, "q").Value Then
   
-  Cells(4, "s").Value = Cells(k, "i").Value
+    Cells(4, "p").Value = Cells(k, "i").Value
   
   End If
   
 Next k
     
-    
-    'Next X
+  Next X
 
-  Max = Application.WorksheetFunction.Max(Range("k2: k800000"))
-     Cells(2, "t").NumberFormat = "0.00%"
-     Cells(2, "t").Value = Max
-  
-  Min = Application.WorksheetFunction.Min(Range("k2:k800000"))
-     Cells(3, "t").NumberFormat = "0.00%"
-     Cells(3, "t").Value = Min
-      
-  max_vol = Application.WorksheetFunction.Max(Range("l2:l800000"))
-    Cells(4, "t") = max_vol
-    
-  
-    End Sub
+  End Sub
