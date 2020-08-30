@@ -81,6 +81,7 @@ Dim ann_change As Variant
       
       Range("J" & Summary_Table_Row).Value = ann_change
       
+    
       Summary_Table_Row = Summary_Table_Row + 1
       
       Stock_Total = 0
@@ -107,7 +108,37 @@ For j = 2 To 800000
   
   Next j
     
-    Next X
+  Summer_Table_Row = 0
+  
+  Dim Max_Change As Double
+
+  Max_Change = 0
+
+
+For k = 2 To 800000
+  
+  If Cells(k, "k").Value = Cells(2, "t").Value Then
+
+  Cells(2, "s").Value = Cells(k, "i").Value
+  
+  End If
+  
+  If Cells(k, "k").Value = Cells(3, "t").Value Then
+  
+  Cells(3, "s").Value = Cells(k, "i").Value
+  
+  End If
+  
+  If Cells(k, "l").Value = Cells(4, "t").Value Then
+  
+  Cells(4, "s").Value = Cells(k, "i").Value
+  
+  End If
+  
+Next k
+    
+    
+    'Next X
 
   Max = Application.WorksheetFunction.Max(Range("k2: k800000"))
      Cells(2, "t").NumberFormat = "0.00%"
