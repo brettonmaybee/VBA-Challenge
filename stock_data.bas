@@ -1,5 +1,16 @@
 Attribute VB_Name = "Module1"
-Sub Stock_Data()
+Sub WorksheetLoop()
+
+Dim WS_Count As Integer
+
+Dim X As Integer
+
+WS_Count = ActiveWorkbook.Worksheets.Count
+
+For X = 1 To WS_Count
+
+Worksheets(X).Activate
+            
   Cells(1, "i") = "Ticker"
   Cells(1, "j") = "Yearly Change"
   Cells(1, "k") = "% Change"
@@ -7,22 +18,23 @@ Sub Stock_Data()
   Cells(1, "o") = "in_price"
   Cells(1, "p") = "fin_price"
   
-  Dim Ticker As String
+Dim Ticker As String
 
-  Dim Stock_Total As Double
+Dim Stock_Total As Double
+  
   Stock_Total = 0
   
-  Dim Summary_Table_Row As Integer
+Dim Summary_Table_Row As Integer
   Summary_Table_Row = 2
   
-  Dim conter As Integer
+Dim conter As Integer
   counter = 0
   
-  Dim in_price As Double
+Dim in_price As Double
   
-  Dim fin_price As Double
+Dim fin_price As Double
    
-  Dim ann_change As Variant
+Dim ann_change As Variant
   
   
     For i = 2 To 705719
@@ -43,12 +55,12 @@ Sub Stock_Data()
       
       ann_change = fin_price - in_price
       
-      If in_price <> 0 Then
+    If in_price <> 0 Then
         
         per_change = (ann_change / in_price) * 0.01
         
         
-      End If
+    End If
        
       Range("i" & Summary_Table_Row).Value = Ticker
 
@@ -78,11 +90,17 @@ Sub Stock_Data()
     End If
 
   Next i
+
 For j = 2 To 705719
+  
   If Cells(j, 11) > 0 Then
         Cells(j, 11).Interior.ColorIndex = 4
     Else
         Cells(j, 11).Interior.ColorIndex = 3
   End If
+  
   Next j
-End Sub
+    
+    Next X
+
+      End Sub
