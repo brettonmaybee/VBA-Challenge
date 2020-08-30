@@ -4,8 +4,8 @@ Sub Stock_Data()
   Cells(1, "j") = "Yearly Change"
   Cells(1, "k") = "% Change"
   Cells(1, "l") = "Total Stock Volume"
-  Cells(1, "n") = "in_price"
-  Cells(1, "o") = "fdin_price"
+  Cells(1, "o") = "in_price"
+  Cells(1, "p") = "fin_price"
   
   ' Set an initial variable for holding the brand name
   Dim Ticker As String
@@ -44,12 +44,13 @@ Sub Stock_Data()
       
       in_price = Cells(i - counter, 6).Value
       
-      ann_change = CDec(fin_price - in_price)
+      ann_change = fin_price - in_price
       
       If in_price <> 0 Then
-        per_change = CDec(ann_change / in_price)
         
-     
+        per_change = (ann_change / in_price) * 0.01
+        
+        
       End If
       
       ' Print the Ticker in the Summary Table
@@ -64,6 +65,8 @@ Sub Stock_Data()
       Range("O" & Summary_Table_Row).Value = in_price
       
       Range("K" & Summary_Table_Row).Value = per_change
+      
+      Range("K" & Summary_Table_Row).NumberFormat = "0.00%"
       
       Range("J" & Summary_Table_Row).Value = ann_change
       ' Add one to the summary table row
