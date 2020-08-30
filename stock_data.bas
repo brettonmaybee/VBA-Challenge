@@ -62,7 +62,7 @@ Dim ann_change As Variant
       
     If in_price <> 0 Then
         
-        per_change = (ann_change / in_price) * 0.01
+        per_change = (ann_change / in_price)
         
         
     End If
@@ -71,9 +71,9 @@ Dim ann_change As Variant
 
       Range("l" & Summary_Table_Row).Value = Stock_Total
 
-      Range("P" & Summary_Table_Row).Value = fin_price
+      'Range("P" & Summary_Table_Row).Value = fin_price
       
-      Range("O" & Summary_Table_Row).Value = in_price
+      'Range("O" & Summary_Table_Row).Value = in_price
       
       Range("K" & Summary_Table_Row).Value = per_change
       
@@ -99,23 +99,26 @@ Dim ann_change As Variant
 For j = 2 To 800000
   
   If Cells(j, 11) > 0 Then
-        Cells(j, 11).Interior.ColorIndex = 4
+        Cells(j, 10).Interior.ColorIndex = 4
+        
     Else
-        Cells(j, 11).Interior.ColorIndex = 3
+        Cells(j, 10).Interior.ColorIndex = 3
   End If
   
   Next j
     
-    'Next X
+    Next X
 
-  max = Application.WorksheetFunction.max(Range("k2: k800000"))
-     
-     Cells(2, "t").Value = max
+  Max = Application.WorksheetFunction.Max(Range("k2: k800000"))
+     Cells(2, "t").NumberFormat = "0.00%"
+     Cells(2, "t").Value = Max
   
   Min = Application.WorksheetFunction.Min(Range("k2:k800000"))
-      
+     Cells(3, "t").NumberFormat = "0.00%"
      Cells(3, "t").Value = Min
       
-  max = Application.WorksheetFunction.max(Range("l2:l800000"))
+  max_vol = Application.WorksheetFunction.Max(Range("l2:l800000"))
+    Cells(4, "t") = max_vol
     
+  
     End Sub
